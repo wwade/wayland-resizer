@@ -1,0 +1,49 @@
+{
+  "classifiers": {
+    "chrome": {
+      "class": "chrome|chromium"
+    },
+    "googleChat": {
+      "class": "chrome|chromium",
+      "title": "google chat"
+    },
+    "terminal": {
+      "class": "terminal|alacritty|gnome-terminal"
+    },
+    "emacs": {
+      "class": "emacs"
+    }
+  },
+  "resolutions": {
+    "1920x1080": {
+      "chrome": {"width": 1920, "centered": false},
+      "googleChat": {"width": 1920, "centered": false},
+      "terminal": {"width": 1920, "centered": false},
+      "emacs": {"width": 1920, "centered": false}
+    },
+    "1920x1200": {
+      "chrome": {"width": 1920, "centered": false},
+      "googleChat": {"width": 1920, "centered": false},
+      "terminal": {"width": 1920, "centered": false},
+      "emacs": {"width": 1920, "centered": false}
+    },
+    "2048x1152": {
+      "chrome": {"width": 2048, "centered": false},
+      "googleChat": {"width": 2048, "centered": false},
+      "terminal": {"width": 2048, "centered": false},
+      "emacs": {"width": 2048, "centered": false}
+    },
+    "3840x2160": {
+      "chrome": {"widthPercent": 0.70, "centered": true},
+      "googleChat": {"widthPercent": 0.70, "centered": true},
+      "terminal": {"width": 1696, "centered": true},
+      "emacs": {"width": 1696, "centered": true}
+    },
+    "2560x1440": {
+      "chrome": {"widthPercent": 0.70, "centered": true},
+      "googleChat": {"widthPercent": 0.70, "centered": false},
+      "terminal": {"width": 1696, "centered": true},
+      "emacs": {"width": 1696, "centered": true}
+    }
+  }
+}

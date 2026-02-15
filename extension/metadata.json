@@ -1,0 +1,10 @@
+{
+  "name": "Window Sizer",
+  "description": "Resize and position windows by resolution",
+  "uuid": "window-sizer@wwade",
+  "shell-version": [
+    "45",
+    "46"
+  ],
+  "version": 3
+}
