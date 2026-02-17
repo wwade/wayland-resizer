@@ -84,23 +84,25 @@ function resizeWindows(allWorkspaces) {
     const classifiers = configs.classifiers;
     const resolutions = configs.resolutions;
 
-    // Get primary monitor
-    const primaryMonitor = Main.layoutManager.primaryMonitor;
-    const resolution = `${primaryMonitor.width}x${primaryMonitor.height}`;
-
-    const config = resolutions[resolution];
-    if (!config) {
-        log(`No configuration for resolution ${resolution}`);
-        Main.notify('Window Sizer', `No configuration for resolution ${resolution}`);
-        return;
-    }
-
     let processed = 0;
+    const monitorsProcessed = new Set();
     const windows = display.get_tab_list(Meta.TabList.NORMAL, null);
 
     for (let win of windows) {
         // Skip if not on active workspace (unless allWorkspaces)
         if (!allWorkspaces && !win.located_on_workspace(workspace)) {
+            continue;
+        }
+
+        // Get window's monitor and resolution
+        const monitorIndex = win.get_monitor();
+        const monitor = Main.layoutManager.monitors[monitorIndex];
+        const resolution = `${monitor.width}x${monitor.height}`;
+
+        // Get config for this monitor's resolution
+        const config = resolutions[resolution];
+        if (!config) {
+            log(`No configuration for resolution ${resolution} on monitor ${monitorIndex}`);
             continue;
         }
 
@@ -110,7 +112,7 @@ function resizeWindows(allWorkspaces) {
         }
 
         const typeConfig = config[windowType];
-        const workArea = win.get_work_area_for_monitor(win.get_monitor());
+        const workArea = win.get_work_area_for_monitor(monitorIndex);
 
         // Calculate width
         let width;
@@ -143,11 +145,24 @@ function resizeWindows(allWorkspaces) {
         // Move and resize
         win.move_resize_frame(false, x, y, width, height);
 
-        log(`Resized ${windowType} (${win.get_wm_class()}) to ${width}x${height} at ${x},${y}`);
+        log(`Resized ${windowType} (${win.get_wm_class()}) to ${width}x${height} at ${x},${y} on monitor ${monitorIndex} (${resolution})`);
         processed++;
+        monitorsProcessed.add(resolution);
     }
 
-    Main.notify('Window Sizer', `Processed ${processed} window(s) at ${resolution}`);
+    // Create notification message
+    let message;
+    if (monitorsProcessed.size === 0) {
+        message = 'No windows processed';
+    } else if (monitorsProcessed.size === 1) {
+        const resolution = Array.from(monitorsProcessed)[0];
+        message = `Processed ${processed} window(s) at ${resolution}`;
+    } else {
+        const resolutionList = Array.from(monitorsProcessed).sort().join(', ');
+        message = `Processed ${processed} window(s) across ${monitorsProcessed.size} monitors (${resolutionList})`;
+    }
+
+    Main.notify('Window Sizer', message);
 }
 
 export default class WindowSizerExtension {

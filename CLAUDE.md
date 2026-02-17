@@ -74,6 +74,8 @@ The bash script calls this D-Bus method using `gdbus` to trigger window resizing
 
 Window sizing rules are defined in a JSON configuration file at `~/.config/sizer2/config.json`. The extension reads this file to determine how to size windows.
 
+**Multi-monitor support**: The extension handles each monitor independently. For each window, it determines which monitor the window is on, then uses the configuration for that monitor's resolution. This allows different sizing rules on different monitors (e.g., a 4K monitor and a Full HD monitor can have different configurations).
+
 **Configuration file structure**:
 - Top-level keys are resolution strings (e.g., `'1920x1080'`, `'2560x1440'`)
 - Each resolution contains window type configs (chrome, googleChat, terminal, emacs)

@@ -95,7 +95,12 @@ Each window type config can have:
 
 1. The bash script calls the GNOME Shell extension via D-Bus
 2. The extension reads `~/.config/sizer2/config.json` to get sizing rules
-3. The extension resizes all windows (both native Wayland apps like Chrome and XWayland apps like terminals)
+3. For each window, the extension determines which monitor it's on and uses the configuration for that monitor's resolution
+4. The extension resizes all windows (both native Wayland apps like Chrome and XWayland apps like terminals)
+
+### Multi-Monitor Support
+
+sizer2 handles multiple monitors independently. Each window is resized according to the configuration for its monitor's resolution. For example, if you have a 2560x1440 monitor and a 1920x1080 monitor, windows on the QHD monitor will use the 2560x1440 configuration while windows on the Full HD monitor will use the 1920x1080 configuration.
 
 ## Troubleshooting
 
