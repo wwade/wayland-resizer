@@ -85,6 +85,15 @@ function resizeWindows(allWorkspaces) {
     const classifiers = configs.classifiers;
     const resolutions = configs.resolutions;
 
+    // Log monitor information at start
+    log('=== Window Sizer: Starting resize operation ===');
+    const numMonitors = Main.layoutManager.monitors.length;
+    log(`Number of monitors: ${numMonitors}`);
+    for (let i = 0; i < numMonitors; i++) {
+        const monitor = Main.layoutManager.monitors[i];
+        log(`Monitor ${i}: ${monitor.width}x${monitor.height} at (${monitor.x}, ${monitor.y})`);
+    }
+
     let processed = 0;
     const monitorsProcessed = new Set();
     const windows = display.get_tab_list(Meta.TabList.NORMAL, null);
@@ -95,10 +104,16 @@ function resizeWindows(allWorkspaces) {
             continue;
         }
 
+        // Log window information
+        const wmClass = win.get_wm_class() || '';
+        const title = win.get_title() || '';
+        log(`\n--- Processing window: wm_class="${wmClass}", title="${title}" ---`);
+
         // Get window's monitor and resolution
         const monitorIndex = win.get_monitor();
         const monitor = Main.layoutManager.monitors[monitorIndex];
         const resolution = `${monitor.width}x${monitor.height}`;
+        log(`Window is on monitor ${monitorIndex} with resolution ${resolution}`);
 
         // Get config for this monitor's resolution
         const config = resolutions[resolution];
@@ -108,11 +123,19 @@ function resizeWindows(allWorkspaces) {
         }
 
         const windowType = classifyWindow(win, classifiers);
-        if (!windowType || !config[windowType]) {
+        if (!windowType) {
+            log(`Window not classified - skipping`);
+            continue;
+        }
+        log(`Window classified as: ${windowType}`);
+
+        if (!config[windowType]) {
+            log(`No config for window type "${windowType}" at resolution ${resolution} - skipping`);
             continue;
         }
 
         const typeConfig = config[windowType];
+        log(`Applying config: ${JSON.stringify(typeConfig)}`);
         const workArea = win.get_work_area_for_monitor(monitorIndex);
 
         // Calculate width
@@ -152,10 +175,13 @@ function resizeWindows(allWorkspaces) {
         // Move and resize
         win.move_resize_frame(false, x, y, width, height);
 
-        log(`Resized ${windowType} (${win.get_wm_class()}) to ${width}x${height} at ${x},${y} on monitor ${monitorIndex} (${resolution})`);
+        log(`Successfully resized ${windowType} (${wmClass}) to ${width}x${height} at (${x},${y}) on monitor ${monitorIndex} (${resolution})`);
+        log(`--- Finished processing window ---`);
         processed++;
         monitorsProcessed.add(resolution);
     }
+
+    log(`\n=== Window Sizer: Resize operation complete ===`);
 
     // Create notification message
     let message;

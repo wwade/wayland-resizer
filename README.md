@@ -114,7 +114,7 @@ gnome-extensions info window-sizer@wwade
 gnome-extensions enable window-sizer@wwade
 
 # Check logs
-journalctl -b /usr/bin/gnome-shell | grep -i sizer
+journalctl -b /usr/bin/gnome-shell
 ```
 
 ### Chrome windows not resizing

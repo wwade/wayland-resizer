@@ -39,7 +39,7 @@ gdbus call --session \
   --method org.gnome.Shell.Extensions.WindowSizer.ResizeWindows false
 
 # Check extension logs
-journalctl -b /usr/bin/gnome-shell | grep -i sizer
+journalctl -b /usr/bin/gnome-shell
 ```
 
 ### Running the Tool
