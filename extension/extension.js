@@ -67,6 +67,7 @@ function classifyWindow(win, classifiers) {
         }
     }
 
+    log(`Classification failure: No match for window with wm_class="${wmClass}", title="${title}"`);
     return null;
 }
 
@@ -118,8 +119,10 @@ function resizeWindows(allWorkspaces) {
         let width;
         if (typeConfig.widthPercent) {
             width = Math.floor(workArea.width * typeConfig.widthPercent);
+            log(`Width calculation for ${windowType}: widthPercent=${typeConfig.widthPercent}, workArea.width=${workArea.width}, result=${width}`);
         } else {
             width = typeConfig.width || workArea.width;
+            log(`Width calculation for ${windowType}: fixed width=${typeConfig.width || 'not set (using workArea.width)'}, result=${width}`);
         }
 
         const height = workArea.height;
@@ -130,15 +133,19 @@ function resizeWindows(allWorkspaces) {
 
         if (align === 'center') {
             x = workArea.x + Math.floor((workArea.width - width) / 2);
+            log(`Position calculation for ${windowType}: align=${align}, workArea.x=${workArea.x}, workArea.width=${workArea.width}, width=${width}, x=${x}`);
         } else if (align === 'right') {
             x = workArea.x + workArea.width - width;
+            log(`Position calculation for ${windowType}: align=${align}, workArea.x=${workArea.x}, workArea.width=${workArea.width}, width=${width}, x=${x}`);
         } else {  // 'left' or any other value defaults to left
             x = workArea.x;
+            log(`Position calculation for ${windowType}: align=${align}, workArea.x=${workArea.x}, x=${x}`);
         }
         const y = workArea.y;
 
         // Unmaximize if needed
         if (win.get_maximized()) {
+            log(`Unmaximizing ${windowType} (${win.get_wm_class()}) before resize`);
             win.unmaximize(Meta.MaximizeFlags.BOTH);
         }
 
