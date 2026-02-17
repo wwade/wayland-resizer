@@ -68,7 +68,7 @@ The config file has two sections:
 
 Each window type config can have:
 - `width` (fixed width in pixels) OR `widthPercent` (percentage of screen width, 0.0-1.0)
-- `centered` (boolean - center window or left-align)
+- `align` (optional: `"left"`, `"right"`, or `"center"` - defaults to `"center"` if not specified)
 
 ### Default Resolutions
 
@@ -76,13 +76,13 @@ Each window type config can have:
 - **1920x1200**: All windows full width
 - **2048x1152**: All windows full width
 - **2560x1440** (QHD):
-  - Chrome: 70% width, centered
-  - Google Chat: 70% width, left-aligned
-  - Terminal/Emacs: 1696px width, centered
+  - Chrome: 70% width, align center
+  - Google Chat: 70% width, align left
+  - Terminal/Emacs: 1696px width, align center
 - **3840x2160** (UHD):
-  - Chrome: 70% width, centered
-  - Google Chat: 70% width, centered
-  - Terminal/Emacs: 1696px width, centered
+  - Chrome: 70% width, align center
+  - Google Chat: 70% width, align center
+  - Terminal/Emacs: 1696px width, align center
 
 ### Default Window Types
 
@@ -141,10 +141,10 @@ Example:
 {
   "resolutions": {
     "3440x1440": {
-      "chrome": {"widthPercent": 0.80, "centered": true},
-      "googleChat": {"width": 1920, "centered": false},
-      "terminal": {"width": 1800, "centered": true},
-      "emacs": {"width": 1800, "centered": true}
+      "chrome": {"widthPercent": 0.80, "align": "centered"},
+      "googleChat": {"width": 1920, "align": "left"},
+      "terminal": {"width": 1800, "align": "centered"},
+      "emacs": {"width": 1800, "align": "centered"}
     }
   }
 }

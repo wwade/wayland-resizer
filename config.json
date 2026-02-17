@@ -16,34 +16,34 @@
   },
   "resolutions": {
     "1920x1080": {
-      "chrome": {"width": 1920, "centered": false},
-      "googleChat": {"width": 1920, "centered": false},
-      "terminal": {"width": 1920, "centered": false},
-      "emacs": {"width": 1920, "centered": false}
+      "chrome": {"width": 1920, "align": "left"},
+      "googleChat": {"width": 1920, "align": "left"},
+      "terminal": {"width": 1920, "align": "left"},
+      "emacs": {"width": 1920, "align": "left"}
     },
     "1920x1200": {
-      "chrome": {"width": 1920, "centered": false},
-      "googleChat": {"width": 1920, "centered": false},
-      "terminal": {"width": 1920, "centered": false},
-      "emacs": {"width": 1920, "centered": false}
+      "chrome": {"width": 1920, "align": "left"},
+      "googleChat": {"width": 1920, "align": "left"},
+      "terminal": {"width": 1920, "align": "left"},
+      "emacs": {"width": 1920, "align": "left"}
     },
     "2048x1152": {
-      "chrome": {"width": 2048, "centered": false},
-      "googleChat": {"width": 2048, "centered": false},
-      "terminal": {"width": 2048, "centered": false},
-      "emacs": {"width": 2048, "centered": false}
+      "chrome": {"width": 2048, "align": "left"},
+      "googleChat": {"width": 2048, "align": "left"},
+      "terminal": {"width": 2048, "align": "left"},
+      "emacs": {"width": 2048, "align": "left"}
     },
     "3840x2160": {
-      "chrome": {"widthPercent": 0.70, "centered": true},
-      "googleChat": {"widthPercent": 0.70, "centered": true},
-      "terminal": {"width": 1696, "centered": true},
-      "emacs": {"width": 1696, "centered": true}
+      "chrome": {"widthPercent": 0.70, "align": "center"},
+      "googleChat": {"widthPercent": 0.70, "align": "center"},
+      "terminal": {"width": 1696, "align": "center"},
+      "emacs": {"width": 1696, "align": "center"}
     },
     "2560x1440": {
-      "chrome": {"widthPercent": 0.70, "centered": true},
-      "googleChat": {"widthPercent": 0.70, "centered": false},
-      "terminal": {"width": 1696, "centered": true},
-      "emacs": {"width": 1696, "centered": true}
+      "chrome": {"widthPercent": 0.70, "align": "center"},
+      "googleChat": {"widthPercent": 0.70, "align": "left"},
+      "terminal": {"width": 1696, "align": "center"},
+      "emacs": {"width": 1696, "align": "center"}
     }
   }
 }

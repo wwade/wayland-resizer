@@ -79,7 +79,7 @@ Window sizing rules are defined in a JSON configuration file at `~/.config/sizer
 - Each resolution contains window type configs (chrome, googleChat, terminal, emacs)
 - Each window type config has:
   - `width` (fixed width in pixels) OR `widthPercent` (percentage of screen width, 0.0-1.0)
-  - `centered` (boolean - center window or left-align)
+  - `align` (optional: `"left"`, `"right"`, or `"center"` - defaults to `"center"` if not specified)
 
 **Adding a new resolution**:
 1. Edit `~/.config/sizer2/config.json` (or `config.json` in the repo before installing)

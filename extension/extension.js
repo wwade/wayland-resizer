@@ -124,9 +124,13 @@ function resizeWindows(allWorkspaces) {
 
         // Calculate position
         let x;
-        if (typeConfig.centered) {
+        const align = typeConfig.align || 'center';  // Default to center alignment
+
+        if (align === 'center') {
             x = workArea.x + Math.floor((workArea.width - width) / 2);
-        } else {
+        } else if (align === 'right') {
+            x = workArea.x + workArea.width - width;
+        } else {  // 'left' or any other value defaults to left
             x = workArea.x;
         }
         const y = workArea.y;
